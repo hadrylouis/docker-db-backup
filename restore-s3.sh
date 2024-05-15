@@ -62,6 +62,7 @@ then
     echo -e "--------------------------------------------------"
     aws s3 cp s3://${DEFAULT_S3_BUCKET}/${LATEST_FILE} ${TEMP_PATH}/${LATEST_FILE} ${PARAMS_AWS_ENDPOINT_URL}
     restore ${TEMP_PATH}/${LATEST_FILE} ${DB01_TYPE} ${DB01_HOST} ${DB01_NAME} ${DB01_USER} ${DB01_PASS} ${DB01_PORT}
+    rm -f ${TEMP_PATH}/${LATEST_FILE}
 else
     echo -e "\n--------------------------------------------------"
     echo -e "Restoration cancelled."
