@@ -11,6 +11,7 @@ if ! aws s3 ls ${PARAMS_AWS_ENDPOINT_URL} > /dev/null 2>&1; then
     echo -e "\nError: Failed to connect to S3. Please check your connection and try again."
     exit 1
 fi
+
 # Filter files from S3
 if [ "${DB01_COMPRESSION}" == "zstd" ]; then
     export SOURCE_FILE=".*\.sql.zst$"
