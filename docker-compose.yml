@@ -16,6 +16,7 @@ services:
 
   backup:
     image: ghcr.io/tiredofit/docker-db-backup:latest
+    container_name: backup
     env_file:
       - environments/backup.env
     volumes:
