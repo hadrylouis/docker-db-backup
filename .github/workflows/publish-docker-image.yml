@@ -17,12 +17,10 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: ghcr.io
-        username: ${{ github.repository_owner }}
+        username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: ghcr.io/${{ github.repository }}:latest
+    - name: Build and Push Docker image
+      run: |
+        docker buildx create --use
+        docker buildx build --cache-from ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest --tag ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest --platform linux/amd64,linux/arm64 --push --file Dockerfile .
